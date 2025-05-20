@@ -1,4 +1,4 @@
-# Computational Chemistry Workflow
+# Atomic Charge Calculation using DDEC6
 
 This repository contains scripts and instructions for conducting computational chemistry analyses using ASE (Atomic Simulation Environment), Gaussian, and Chargemol. The workflow includes molecular extraction, geometry optimization, wavefunction calculations, and charge/bond order analysis.
 
@@ -141,39 +141,22 @@ cd ../..
 │   ├── create_gaussian_input.py
 │   ├── extract_optimized_geometry.py
 │   └── create_wfx_job.py
-├── gaussian/
-│   ├── geometry_optimization/
-│   │   ├── geom_opt.com
-│   │   ├── geom_opt.log
-│   │   ├── geom_opt.chk
-│   │   └── optimized_molecule.xyz
-│   ├── wavefunction/
-│   │   ├── wfx_calc.com
-│   │   ├── wfx_calc.log
-│   │   └── output.wfx
-│   └── chargemol/
-│       ├── job_control.txt
-│       ├── DDEC6_even_tempered_net_atomic_charges.xyz
-│       ├── DDEC_atomic_spinmoments.xyz
-│       └── DDEC6_bond_orders.csv
-└── tutorial/
-    ├── example_molecule/
-    │   ├── geometry_optimization/
-    │   │   ├── geom_opt.com
-    │   │   ├── geom_opt.log
-    │   │   ├── geom_opt.chk
-    │   │   └── optimized_molecule.xyz
-    │   ├── wavefunction/
-    │   │   ├── wfx_calc.com
-    │   │   ├── wfx_calc.log
-    │   │   └── output.wfx
-    │   └── chargemol/
-    │       ├── job_control.txt
-    │       ├── DDEC6_even_tempered_net_atomic_charges.xyz
-    │       ├── DDEC_atomic_spinmoments.xyz
-    │       └── DDEC6_bond_orders.csv
-    └── README.md  # Tutorial-specific documentation
-
+└── gaussian/
+    ├── geometry_optimization/
+    │   ├── geom_opt.com
+    │   ├── geom_opt.log
+    │   ├── geom_opt.chk
+    │   └── optimized_molecule.xyz
+    ├── wavefunction/
+    │   ├── wfx_calc.com
+    │   ├── wfx_calc.log
+    │   └── output.wfx
+    └── chargemol/
+        ├── job_control.txt
+        ├── DDEC6_even_tempered_net_atomic_charges.xyz
+        ├── DDEC_atomic_spinmoments.xyz
+        └── DDEC6_bond_orders.csv
+```
 ## Output Analysis
 
 After running Chargemol, you'll find several output files in the gaussian/chargemol directory:
@@ -192,7 +175,3 @@ You can analyze these files to understand the electronic structure and bonding i
 - **Memory issues**: Adjust memory allocations in Gaussian input files
 
 ## Additional Resources
-
-- [ASE Documentation](https://wiki.fysik.dtu.dk/ase/)
-- [Gaussian Documentation](https://gaussian.com/man/)
-- [Chargemol/DDEC6 Documentation](https://github.com/qzhu2017/DDEC6)
