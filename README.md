@@ -178,4 +178,4 @@ You can analyze these files to understand the electronic structure and bonding i
 
 - [ASE Documentation](https://wiki.fysik.dtu.dk/ase/)
 - [Gaussian Documentation](https://gaussian.com/man/)
-- [Chargemol/DDEC6 Documentation](https://github.com/qzhu2017/DDEC6)
+- [Chargemol/DDEC6 Documentation](h[ttps://github.com/qzhu2017/DDEC6](https://github.com/berquist/chargemol))
