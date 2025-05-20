@@ -175,3 +175,7 @@ You can analyze these files to understand the electronic structure and bonding i
 - **Memory issues**: Adjust memory allocations in Gaussian input files
 
 ## Additional Resources
+
+- [ASE Documentation](https://wiki.fysik.dtu.dk/ase/)
+- [Gaussian Documentation](https://gaussian.com/man/)
+- [Chargemol/DDEC6 Documentation](https://github.com/berquist/chargemol)
