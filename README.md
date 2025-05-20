@@ -141,21 +141,38 @@ cd ../..
 │   ├── create_gaussian_input.py
 │   ├── extract_optimized_geometry.py
 │   └── create_wfx_job.py
-└── gaussian/
-    ├── geometry_optimization/
-    │   ├── geom_opt.com
-    │   ├── geom_opt.log
-    │   ├── geom_opt.chk
-    │   └── optimized_molecule.xyz
-    ├── wavefunction/
-    │   ├── wfx_calc.com
-    │   ├── wfx_calc.log
-    │   └── output.wfx
-    └── chargemol/
-        ├── job_control.txt
-        ├── DDEC6_even_tempered_net_atomic_charges.xyz
-        ├── DDEC_atomic_spinmoments.xyz
-        └── DDEC6_bond_orders.csv
+├── gaussian/
+│   ├── geometry_optimization/
+│   │   ├── geom_opt.com
+│   │   ├── geom_opt.log
+│   │   ├── geom_opt.chk
+│   │   └── optimized_molecule.xyz
+│   ├── wavefunction/
+│   │   ├── wfx_calc.com
+│   │   ├── wfx_calc.log
+│   │   └── output.wfx
+│   └── chargemol/
+│       ├── job_control.txt
+│       ├── DDEC6_even_tempered_net_atomic_charges.xyz
+│       ├── DDEC_atomic_spinmoments.xyz
+│       └── DDEC6_bond_orders.csv
+└── tutorial/
+    ├── example_molecule/
+    │   ├── geometry_optimization/
+    │   │   ├── geom_opt.com
+    │   │   ├── geom_opt.log
+    │   │   ├── geom_opt.chk
+    │   │   └── optimized_molecule.xyz
+    │   ├── wavefunction/
+    │   │   ├── wfx_calc.com
+    │   │   ├── wfx_calc.log
+    │   │   └── output.wfx
+    │   └── chargemol/
+    │       ├── job_control.txt
+    │       ├── DDEC6_even_tempered_net_atomic_charges.xyz
+    │       ├── DDEC_atomic_spinmoments.xyz
+    │       └── DDEC6_bond_orders.csv
+    └── README.md  # Tutorial-specific documentation
 
 ## Output Analysis
 
