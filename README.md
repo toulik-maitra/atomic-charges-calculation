@@ -48,39 +48,9 @@ cp -r /path/to/extracted/atomic_densities/ $HOME/bin/
 
 ### 1. Extract One Molecule from Unit Cell
 
-Create a file named `one_molecule.py` with the following content:
-
-```python
-from ase import io
-import numpy as np
-
-# Read the unit cell structure
-unitcell = io.read('path/to/unitcell_file.cif')  # Adjust file format as needed
-
-# Extract a single molecule (this will depend on your specific structure)
-# Method 1: Using connectivity
-from ase.build import connected_indices
-atoms_indices = connected_indices(unitcell, 0)  # Start from atom index 0
-molecule = unitcell[atoms_indices]
-
-# Method 2: Alternative approach for specific cases
-# Define a center atom and select atoms within a certain radius
-# center_atom_index = 0
-# cutoff_radius = 3.0  # Adjust as needed (in Å)
-# distances = unitcell.get_distances(center_atom_index, range(len(unitcell)), mic=True)
-# molecule_indices = np.where(distances < cutoff_radius)[0]
-# molecule = unitcell[molecule_indices]
-
-# Verify the number of atoms in the extracted molecule
-expected_atoms = 42  # Replace with the expected number of atoms in your molecule
-if len(molecule) != expected_atoms:
-    print(f"Warning: Extracted molecule has {len(molecule)} atoms, expected {expected_atoms}")
-else:
-    print(f"Successfully extracted molecule with {len(molecule)} atoms")
-
-# Write the molecule to a file
-io.write('molecule.xyz', molecule)
-```
+The script `scripts/one_molecule.py` handles the extraction of a single molecule from a unit cell structure. It provides two methods:
+- Using connectivity starting from a specific atom
+- Using distance-based selection from a center atom
 
 Run the script:
 
@@ -90,32 +60,7 @@ python scripts/one_molecule.py
 
 ### 2. Create Gaussian Input for Geometry Optimization
 
-Create a file named `create_gaussian_input.py` in the scripts directory:
-
-```python
-from ase import io
-from ase.calculators.gaussian import Gaussian
-
-# Read the extracted molecule
-molecule = io.read('molecule.xyz')
-
-# Set up Gaussian calculator for geometry optimization
-calc = Gaussian(
-    mem='8GB',
-    nprocshared=8,
-    label='gaussian/geom_opt',  # Updated path
-    method='B3LYP',
-    basis='6-31G(d)',
-    opt='Tight',
-    scf='QC',
-    chk='gaussian/geom_opt.chk'  # Updated path
-)
-
-molecule.calc = calc
-
-# Write the Gaussian input file
-calc.write_input(molecule)
-```
+The script `scripts/create_gaussian_input.py` creates a Gaussian input file for geometry optimization using B3LYP/6-31G(d) level of theory.
 
 Run the script to generate the Gaussian input file:
 
@@ -133,20 +78,7 @@ cd ..
 
 ### 3. Extract Optimized Geometry from Gaussian Log File
 
-Create a script named `extract_optimized_geometry.py` in the scripts directory:
-
-```python
-from ase import io
-from ase.io.gaussian import read_gaussian_out
-
-# Read the optimized geometry from the log file
-optimized_molecule = read_gaussian_out('gaussian/geom_opt.log', index=-1)
-
-# Write the optimized geometry to XYZ format
-io.write('gaussian/optimized_molecule.xyz', optimized_molecule)
-
-print(f"Successfully extracted optimized geometry with {len(optimized_molecule)} atoms")
-```
+The script `scripts/extract_optimized_geometry.py` extracts the optimized geometry from the Gaussian output file and saves it in XYZ format.
 
 Run the script:
 
@@ -156,51 +88,7 @@ python scripts/extract_optimized_geometry.py
 
 ### 4. Create Wavefunction Calculation Job
 
-Create a script named `create_wfx_job.py` in the scripts directory:
-
-```python
-from ase import io
-from ase.calculators.gaussian import Gaussian
-
-# Read the optimized molecule
-optimized_molecule = io.read('gaussian/optimized_molecule.xyz')
-
-# Set up Gaussian calculator for wavefunction calculation
-calc = Gaussian(
-    mem='16GB',
-    nprocshared=16,
-    label='gaussian/wfx_calc',  # Updated path
-    method='B3LYP',  # Use the same level of theory as optimization
-    basis='6-311++G(d,p)',  # Typically a larger basis set for wavefunction analysis
-    output='wfx',  # Request WFX file output
-    pop='full',
-    density='current',
-    scf='QC'
-)
-
-optimized_molecule.calc = calc
-
-# Write the Gaussian input file
-calc.write_input(optimized_molecule)
-
-# Modify the generated com file to ensure .wfx file generation
-with open('gaussian/wfx_calc.com', 'r') as file:  # Updated path
-    content = file.readlines()
-
-# Add WFX file generation instruction if needed
-modified_content = []
-for line in content:
-    modified_content.append(line)
-    if line.strip() == '':  # Find the first blank line after route section
-        # Add the wfx filename specification
-        modified_content.append('output.wfx\n\n')
-        break
-
-with open('gaussian/wfx_calc.com', 'w') as file:  # Updated path
-    file.writelines(modified_content)
-
-print("Created wavefunction calculation input file: gaussian/wfx_calc.com")
-```
+The script `scripts/create_wfx_job.py` prepares a Gaussian input file for wavefunction calculation using B3LYP/6-311++G(d,p) level of theory and generates a WFX file for charge analysis.
 
 Run the script and submit the job:
 

@@ -1,0 +1,21 @@
+<periodicity along A, B, and C vectors>
+.false.
+.false.
+.false.
+</periodicity along A, B, and C vectors>
+
+<atomic densities directory complete path>
+/global/u2/t/toulik04/chargemol/bin/atomic_densities/
+</atomic densities directory complete path>
+
+<input filename>
+mol1_opt-wfn.wfx
+</input filename>
+
+<charge type>
+DDEC6
+</charge type>
+
+<compute BOs>
+.true.
+</compute BOs>
