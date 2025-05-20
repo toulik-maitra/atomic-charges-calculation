@@ -71,9 +71,9 @@ python scripts/create_gaussian_input.py
 Submit the job to Gaussian:
 
 ```bash
-cd gaussian
+cd gaussian/geometry_optimization
 g16 < geom_opt.com > geom_opt.log
-cd ..
+cd ../..
 ```
 
 ### 3. Extract Optimized Geometry from Gaussian Log File
@@ -94,16 +94,16 @@ Run the script and submit the job:
 
 ```bash
 python scripts/create_wfx_job.py
-cd gaussian
+cd gaussian/wavefunction
 g16 < wfx_calc.com > wfx_calc.log
-cd ..
+cd ../..
 ```
 
 ### 5. Use Chargemol to Calculate Atomic Charges and Bond Orders
 
 #### Prepare the job_control.txt file
 
-Create a file named `job_control.txt` in the gaussian directory with the following content:
+Create a file named `job_control.txt` in the gaussian/chargemol directory with the following content:
 
 ```
 <atomic densities directory complete path>
@@ -116,21 +116,19 @@ DDEC6
 .true.
 
 <input filename>
-output.wfx
+../../wavefunction/output.wfx
 
 <net charge>
 0
 ```
 
-Adjust the `<net charge>` value according to your molecule.
-
 #### Run Chargemol
 
 ```bash
-cd gaussian  # Change to the gaussian directory where the wfx file is located
+cd gaussian/chargemol  # Change to the chargemol directory
 cp /path/to/job_control.txt ./
 $HOME/bin/Chargemol_09_26_2017_linux_parallel
-cd ..
+cd ../..
 ```
 
 ## Project Structure
@@ -143,20 +141,25 @@ cd ..
 │   ├── create_gaussian_input.py
 │   ├── extract_optimized_geometry.py
 │   └── create_wfx_job.py
-├── gaussian/
-│   ├── geom_opt.com
-│   ├── geom_opt.log
-│   ├── geom_opt.chk
-│   ├── optimized_molecule.xyz
-│   ├── wfx_calc.com
-│   ├── wfx_calc.log
-│   ├── output.wfx
-│   └── job_control.txt
-└── atomic_densities/  # Optional: If you want to keep atomic densities in project
+└── gaussian/
+    ├── geometry_optimization/
+    │   ├── geom_opt.com
+    │   ├── geom_opt.log
+    │   ├── geom_opt.chk
+    │   └── optimized_molecule.xyz
+    ├── wavefunction/
+    │   ├── wfx_calc.com
+    │   ├── wfx_calc.log
+    │   └── output.wfx
+    └── chargemol/
+        ├── job_control.txt
+        ├── DDEC6_even_tempered_net_atomic_charges.xyz
+        ├── DDEC_atomic_spinmoments.xyz
+        └── DDEC6_bond_orders.csv
 
 ## Output Analysis
 
-After running Chargemol, you'll find several output files in the gaussian directory:
+After running Chargemol, you'll find several output files in the gaussian/chargemol directory:
 
 - `DDEC6_even_tempered_net_atomic_charges.xyz`: Contains the optimized geometry with DDEC6 charges
 - `DDEC_atomic_spinmoments.xyz`: Contains atomic spin moments
