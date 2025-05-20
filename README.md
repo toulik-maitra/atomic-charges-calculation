@@ -1,4 +1,4 @@
-# Computational Chemistry Workflow
+# Atomic Charge Calculation using DDEC6
 
 This repository contains scripts and instructions for conducting computational chemistry analyses using ASE (Atomic Simulation Environment), Gaussian, and Chargemol. The workflow includes molecular extraction, geometry optimization, wavefunction calculations, and charge/bond order analysis.
 
@@ -156,7 +156,7 @@ cd ../..
         ├── DDEC6_even_tempered_net_atomic_charges.xyz
         ├── DDEC_atomic_spinmoments.xyz
         └── DDEC6_bond_orders.csv
-
+```
 ## Output Analysis
 
 After running Chargemol, you'll find several output files in the gaussian/chargemol directory:
