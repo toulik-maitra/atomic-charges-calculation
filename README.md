@@ -108,18 +108,20 @@ Create a file named `job_control.txt` in the gaussian/chargemol directory with t
 ```
 <atomic densities directory complete path>
 $HOME/bin/atomic_densities/
+<\atomic densities directory complete path>
 
 <charge type>
 DDEC6
+<\charge type>
 
 <compute BOs>
 .true.
+<\compute BOs>
 
 <input filename>
 ../../wavefunction/output.wfx
+<\input filename>
 
-<net charge>
-0
 ```
 
 #### Run Chargemol
